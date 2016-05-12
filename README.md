@@ -1,4 +1,4 @@
-# autentia-university-lib
+# Polymer-widgets-POC
 Código correspondiente a la POC para generar una librería de widgets en polymer
 
 # Pasos para ejecutarlo después de la clonación
