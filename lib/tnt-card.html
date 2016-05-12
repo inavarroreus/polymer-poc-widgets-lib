@@ -1,0 +1,44 @@
+<dom-module id="tnt-card">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+
+            paper-card {
+                background-color: var(--tnt-card-background, orange);
+                color: var(--tnt-card-color, white);
+            }
+
+        </style>
+
+        <paper-card image="[[avatar]]">
+            <div class="card-content">Login: [[login]]</div>
+        </paper-card>
+        <div>
+            <div hidden$="{{showIt}}"> hi! </div>
+            <button on-click="handleClick">Kick Me</button>
+        </div>
+
+    </template>
+    <script>
+        Polymer({
+            is: 'tnt-card',
+            properties: {
+                user: {
+                    type: Object,
+                    value: {}
+                },
+                showIt: {
+                    type: Boolean,
+                    value: false
+                }
+            },
+            handleClick: function(e, detail){
+                console.log(e);
+                this.showIt = !this.showIt;
+                console.log(this.showIt)
+            }
+        });
+    </script>
+</dom-module>
