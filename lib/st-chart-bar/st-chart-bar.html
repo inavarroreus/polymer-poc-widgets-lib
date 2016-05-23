@@ -1,0 +1,40 @@
+<dom-module is="st-chart-bar">
+    <link rel="import" type="css" href="st-chat-bar.css">
+    <template>
+        <google-chart
+                type='column'
+                data='[[data]]'>
+        </google-chart>
+    </template>
+    <script>
+
+    </script>
+</dom-module>
+<script>
+    Polymer({
+        is: "st-chart-bar",
+        properties: {
+            data: {
+                type: Object,
+                value: {}
+            },
+            options: {
+                type: Object,
+                value: {}
+            },
+            cols: {
+                type: Array,
+                value: []
+            },
+            rows: {
+                type: Array,
+                value:[]
+            }
+        },
+        ready: function (chart, svg) {
+            console.log('Creating column');
+        }
+    });
+</script>
+
+

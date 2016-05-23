@@ -1,0 +1,104 @@
+<dom-module id="st-widget">
+    <link rel="import" type="css" href="st-widget.css">
+    <template>
+        <template is="dom-if" if="{{isLine}}">
+            <st-chart-line
+                    data="[[data]]"
+                    options='{"title": "this is the chart title title"}'></st-chart-line>
+        </template>
+        <template is="dom-if" if="{{isPie}}">
+            <st-chart-pie
+                    data="[[data]]"
+                    options='{"title": "this is the chart pie title"'></st-chart-pie>
+        </template>
+        <template is="dom-if" if="{{isBar}}">
+            <st-chart-bar
+                    data="[[data]]"></st-chart-bar>
+        </template>
+
+        <template is="dom-if" if="[[url]]">
+            <iron-ajax
+                    auto
+                    url="[[url]]"
+                    params='{"alt":"json"}'
+                    handle-as="json"
+                    on-response="handleResponse"
+                    options="[[options]]"
+                    debounce-duration="300">
+            </iron-ajax>
+        </template>
+    </template>
+    <script>
+        Polymer({
+            is: 'st-widget',
+            listeners: {
+                'select': 'clickHandler'
+            },
+            clickHandler: function (event) {
+                console.log(event);
+                //value = '['Mar' , 32,4];
+            },
+            properties: {
+                url: {
+                    type: String,
+                    value: ""
+                },
+                data: {
+                    type: Array,
+                    value: [{}]
+                },
+                type: {
+                    type: String,
+                    value: 'line'
+                },
+                isLine: {
+                    type: Boolean,
+                    value: false
+                },
+                isSpark: {
+                    type: Boolean,
+                    value: false
+                },
+                isBar: {
+                    type: Boolean,
+                    value: false
+                },
+                isPie: {
+                    type: Boolean,
+                    value: false
+                }
+            },
+            ready: function () {
+                document.addEventListener('google-chart-select', (function () {
+                    this.clickHandler(event);
+                }).bind(this));
+                this.checkType();
+            },
+            attached: function () {
+
+            },
+            renderElements: function () {
+
+            },
+            handleResponse: function (event) {
+                console.log(event.detail.response);
+                this.data = event.detail.response;
+            },
+            checkType: function () {
+                if (this.type === 'line') {
+                    this.isLine = true;
+                } else if (this.type === 'spark') {
+                    this.isSpark = true;
+                } else if (this.type === 'pie') {
+                    this.isPie = true;
+                } else if (this.type === 'bar'){
+                    this.isBar = true;
+                }
+                console.log(this.isPie);
+            },
+            isLine: function () {
+                return this.type === 'line';
+            }
+        })
+    </script>
+</dom-module>

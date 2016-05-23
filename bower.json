@@ -21,7 +21,10 @@
     "iron-iconset": "PolymerElements/iron-iconset#^1.0.4",
     "iron-icons": "PolymerElements/iron-icons#^1.1.3",
     "paper-styles": "PolymerElements/paper-styles#^1.1.4",
+    "google-chart": "google-chart#latest",
     "install": "^1.0.4",
-    "poly-nvd3": "^1.4.2"
+    "poly-nvd3": "^1.4.2",
+    "nvd3-elements" : "nvd3-elements#latest"
+
   }
 }

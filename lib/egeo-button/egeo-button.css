@@ -1,0 +1,261 @@
+.egeo-c-button {
+    box-sizing: border-box;
+    position: relative;
+    border: 0;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 0.94rem;
+    height: 40px;
+    min-width: 180px;
+    padding: 8px 20px;
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.5s;
+}
+
+.egeo-c-button .egeo-c-icon:last-child {
+    margin: 0 0 0 8px;
+}
+
+.egeo-c-button .egeo-c-icon:first-child {
+    margin: 0 8px 0 0;
+}
+
+.egeo-c-button--small {
+    font-size: 0.84rem;
+    height: 30px;
+    padding: 4px 15px;
+}
+
+.egeo-c-button--small .egeo-c-icon {
+    margin: 0 6px 0 0;
+}
+
+.egeo-c-button--xxsmall {
+    font-size: 0.84rem;
+    height: 12px;
+    padding: 0 5px;
+}
+
+.egeo-c-button--xxsmall .egeo-c-icon {
+    margin: 0 6px 0 0;
+}
+
+.egeo-c-button--rounded {
+    border-radius: 100%;
+    min-width: 40px;
+    outline: none;
+    padding: 0;
+    width: 40px;
+}
+
+.egeo-c-button--rounded .egeo-c-icon {
+    display: block;
+    margin: 0;
+}
+
+.egeo-c-button--rounded .egeo-c-icon:first-child {
+    margin: 0;
+}
+
+.egeo-c-button--rounded .egeo-c-icon:last-child {
+    margin: 0;
+}
+
+.egeo-c-button--rounded.egeo-c-button--small {
+    min-width: 30px;
+    width: 30px;
+}
+
+.egeo-c-button--main-1 {
+    background: #37b5e4;
+    border: 0;
+    color: #fff;
+}
+
+.egeo-c-button--main-1:hover {
+    background: #2d96bd;
+    border: 0;
+    color: #fff;
+}
+
+.egeo-c-button--main-1:focus {
+    background: #3dc9fc;
+    border: 0;
+    color: #fff;
+    box-shadow: 0 0 5px 0 rgba(85, 85, 85, 0.5);
+    outline: none;
+}
+
+.egeo-c-button--main-2 {
+    background: #b5c1c5;
+    border: 0;
+    color: #fff;
+}
+
+.egeo-c-button--main-2:hover {
+    background: #919b9e;
+    border: 0;
+    color: #fff;
+}
+
+.egeo-c-button--main-2:focus {
+    background: #ccd9de;
+    border: 0;
+    color: #fff;
+    box-shadow: 0 0 5px 0 rgba(85, 85, 85, 0.5);
+    outline: none;
+}
+
+.egeo-c-button--main-3 {
+    background: #405467;
+    border: 0;
+    color: #fff;
+}
+
+.egeo-c-button--main-3:hover {
+    background: #283440;
+    border: 0;
+    color: #fff;
+}
+
+.egeo-c-button--main-3:focus {
+    background: #4f6880;
+    border: 0;
+    color: #fff;
+    box-shadow: 0 0 5px 0 rgba(85, 85, 85, 0.5);
+    outline: none;
+}
+
+.egeo-c-button--secondary-1 {
+    background: transparent;
+    border: 3px solid #e4e4e4;
+    color: #cbcbcb;
+}
+
+.egeo-c-button--secondary-1:hover {
+    background: transparent;
+    border: 3px solid #cbcbcb;
+    color: #b5b5b5;
+}
+
+.egeo-c-button--tool-1 {
+    background: #f3f3f3;
+    border: 0;
+    color: #37b5e4;
+}
+
+.egeo-c-button--tool-1:hover {
+    background: #e4e4e4;
+    border: 0;
+    color: #2d96bd;
+}
+
+.egeo-c-button--tool-2 {
+    background: #f3f3f3;
+    border: 0;
+    color: #999;
+}
+
+.egeo-c-button--tool-2:hover {
+    background: #e4e4e4;
+    border: 0;
+    color: #777;
+}
+
+.egeo-c-button--tool-ellipsis {
+    background: transparent;
+    border: 2px solid #b5b5b5;
+    color: #999;
+}
+
+.egeo-c-button--tool-ellipsis:hover {
+    background: transparent;
+    border: 2px solid #b5b5b5;
+    color: #999;
+}
+
+.egeo-c-button--help {
+    background: transparent;
+    border: 0;
+    color: #b5b5b5;
+    min-width: 12px;
+    width: 12px;
+}
+
+.egeo-c-button--danger {
+    background: #e23b2b;
+    border: 0;
+    color: #fff;
+}
+
+.egeo-c-button--danger:hover {
+    background: #c93426;
+    border: 0;
+    color: #fff;
+}
+
+.egeo-c-button--disabled, .egeo-c-button:disabled {
+    background: #e4e4e4;
+    border: 0;
+    color: #fff;
+}
+
+.egeo-c-button--dropdown-1 {
+    background: transparent;
+    border: 0;
+    color: #777;
+    min-width: 0;
+    padding: 0;
+}
+
+.egeo-c-button--dropdown-1:hover {
+    background: transparent;
+    border: 0;
+    color: #999;
+    min-width: 0;
+    padding: 0;
+}
+
+.egeo-c-button--dropdown-1:focus {
+    background: transparent;
+    border: 0;
+    color: #999;
+    min-width: 0;
+    padding: 0;
+    outline: none;
+}
+
+.egeo-c-button--menu-1 {
+    background: transparent;
+    border: 0;
+    color: #777;
+    min-width: 0;
+    padding: 0;
+}
+
+.egeo-c-button--menu-1:hover {
+    background: transparent;
+    border: 0;
+    color: #b5b5b5;
+    min-width: 0;
+    padding: 0;
+}
+
+.egeo-c-button--menu-1:focus {
+    background: transparent;
+    border: 0;
+    color: #b5b5b5;
+    min-width: 0;
+    padding: 0;
+    outline: none;
+}
+
+/* egeo-c-icon */
+
+.egeo-c-icon {
+    box-sizing: border-box;
+    position: relative;
+}

@@ -1,0 +1,63 @@
+<dom-module id="egeo-button">
+    <link rel="import" type="css" href="egeo-button.css">
+    <template>
+        <button type="[[type]]" id$ = "{{buttonId}}"
+                class$="{{buttonClass}}"
+                role="button" tabindex="[[tabindex]]">
+
+            <i hidden$="{{!iconLeft}}" class$="egeo-c-icon [[iconLeft]]"></i>
+            <span hidden$="[[rounded]]">{{label}}</span>
+
+            <i hidden$="{{iconRight}}" class$="egeo-c-icon {{iconRight}}"></i>
+
+            <div hidden$="{{!hasPopover}}" class="egeo-c-popover__arrow egeo-c-popover__arrow--top"></div>
+
+            <div hidden$="{{!hasPopover}}" class="egeo-c-popover__arrow-shadow egeo-c-popover__arrow-shadow--top"></div>
+        </button>
+    </template>
+    <script>
+        Polymer({
+            is: 'egeo-button',
+            properties: {
+                buttonId: String,
+                atRight: Boolean,
+                iconLeft: String,
+                iconRight: String,
+                label: String,
+                popover: String,
+                rounded: {type: Boolean, value: false},
+                small: Boolean,
+                xxsmall: Boolean,
+                tabindex: Number,
+                type: String,
+                modifier: {
+                    type: String, value: ''
+                },
+                hasPopover: {type: Boolean, value: false},
+                isOpenPopover: {type: Boolean, value: false},
+                isPopoverInitialized: {type: Boolean, value: false}
+            },
+
+            ready: function() {
+                this.buttonClass = this.getButtonClass();
+            },
+            getButtonClass: function() {
+                var componentClass = "egeo-c-button egeo-c-button--" + this.modifier;
+                if (this.rounded) {
+                    return componentClass + ' egeo-c-button--rounded'
+                }
+                if (this.small) {
+                    return componentClass + ' egeo-c-button--small'
+                }
+                if (this.xxsmall) {
+                    return componentClass + ' egeo-c-button--xxsmall'
+                }
+                if (this.atRight) {
+                    return componentClass + ' egeo-u-float--right'
+                }
+                return componentClass;
+
+            }
+        });
+    </script>
+</dom-module>

@@ -1,0 +1,41 @@
+<dom-module is="st-chart-line">
+    <link rel="import" type="css" href="st-chat-line.css">
+    <template>
+        <google-chart
+                type='line'
+                options='[[options]]'
+                data='[[data]]'>
+        </google-chart>
+    </template>
+    <script>
+
+    </script>
+</dom-module>
+<script>
+    Polymer({
+        is: "st-chart-line",
+        properties: {
+            data: {
+                type: Object,
+                value: {}
+            },
+            options: {
+                type: Object,
+                value: {}
+            },
+            cols: {
+                type: Array,
+                value: []
+            },
+            rows: {
+                type: Array,
+                value:[]
+            }
+        },
+        ready: function (chart, svg) {
+            console.log('Creating line');
+        }
+    });
+</script>
+
+

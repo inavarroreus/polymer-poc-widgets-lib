@@ -1,0 +1,13 @@
+<script>
+    Polymer({
+        is: "st-chart-spark",
+        nvModel: nv.models.sparkline,
+        behaviors: [NVD3Behavior],
+        properties: {
+            data: {
+                type: Object,
+                value: []
+            }
+        }
+    });
+</script>

@@ -1,17 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Banco pruebas polymer-widgets</title>
-  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-  <link rel="import" href="bower_components/polymer/polymer.html"/>
-  <link rel="import" href="lib/lib.html"/>
+    <meta charset="utf-8">
+    <title>Banco pruebas polymer-widgets</title>
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="bower_components/polymer/polymer.html"/>
+    <link rel="import" href="lib/lib.html"/>
+    <style>
+        st-widget {
+            float: left;
+            margin-left: 20px;
+        }
+    </style>
 </head>
 <body>
-  <h1>Showcase components</h1>
 
-  <st-widget-line width="500" url="bower_components/poly-nvd3/examples/demo.json"></st-widget-line>
-  <st-widget-spark width="500" url="bower_components/poly-nvd3/examples/demo2.json"></st-widget-spark>
+
+<st-widget type='bar' data='[["Categories", "Value"],["Category 1", 1.0],["Category 2", 1.1]]'></st-widget>
+<st-widget type="pie" data='[[ " Task ", "Hours per Day" ], [ "Work", 11 ], [ "Eat", 2 ], [ "Commute", 2 ], [ "Watch TV", 2 ], [ "Sleep", 7 ] ]'></st-widget>
+<st-widget type="line" url="http://localhost:8080/mocks/line.json"></st-widget>
+
+<script>
+    document.addEventListener('WebComponentsReady', function () {
+        console.log('WebComponentReady');
+
+    });
+</script>
 
 </body>
 </html>

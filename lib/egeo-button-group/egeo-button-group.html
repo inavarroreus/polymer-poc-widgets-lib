@@ -1,0 +1,103 @@
+<dom-module id="egeo-button-group">
+    <link href="../egeo-button/egeo-button.html" rel="import">
+    <link rel="import" type="css" href="button-group.css">
+    <template>
+        <style>
+            .egeo-c-popover {
+                display: inline-block;
+            }
+        </style>
+
+        Change grid width <input type="number" value="{{gridWidth::input}}"/>
+        <hr>
+        <span class="egeo-c-buttongroup" id="buttonList">
+        <template is="dom-repeat" items="{{itemsToShow}}" as="button">
+            <egeo-button type="{{button.type}}" label="[[button.label]]" popover="popover-[[button.id]]"
+                         button-id="{{button.id}}"
+                         modifier="[[button.modifier]]"
+                         rounded="[[button.rounded]]" small="[[button.small]]"
+                         icon-left="[[button.iconLeft]]">
+            </egeo-button>
+
+
+        </template>
+            <span class="egeo-c-buttongroup__more" hidden$="{{!showPopoverButton}}">
+            <egeo-button type="submit" popover="popover-{{id}}" modifier="tool-ellipsis"
+                         rounded="true" small="{{small}}" icon-left="fa fa-ellipsis-h" on-click="togglePopover">
+            </egeo-button>
+
+            <div class="egeo-c-popover" data-id="popover-{{id}}" hidden$="{{!isPopoverShown}}"
+                 $class="{{ {popoverToRight: 'egeo-c-popover--right-aligned'} }}">
+
+                <template is="dom-repeat" items="{{popoverButtons}}" as="button" class$="egeo-c-popover__listitems">
+                    <egeo-button type="{{button.type}}" label="[[button.label]]" class="egeo-c-popover__listitem"
+                                 popover="popover-[[button.id]]"
+                                 modifier="egeo-c-popover__listitem"
+                                 small="[[button.small]]"
+                                 icon-left="[[button.iconLeft]]">
+                    </egeo-button>
+                </template>
+            </div>
+            </span>
+        </span>
+    </template>
+    <script>
+        Polymer({
+            is: 'egeo-button-group',
+            properties: {
+                popoverToRight: Boolean,
+                small: Boolean,
+                buttons: {type: Array, value: []},
+                maxButtons: {type: Number, value: 10},
+                gridWidth: {type: Number, value: 462},
+                showPopoverButton: {type: Boolean, value: false}
+            },
+            observers: [
+                'gridWidthChanged(gridWidth)'
+            ],
+            gridWidthChanged: function() {
+                this.renderElements()
+            },
+            togglePopover: function() {
+                this.isPopoverShown = !this.isPopoverShown;
+            },
+            ready: function() {
+                this.isPopoverShown = false;
+                this.popoverButtons = [];
+                this.buttonWidth = 45;
+
+                var _this = this;
+                window.addEventListener("resize", function(e) {
+                    _this.windowResize(e);
+                });
+            },
+            attached: function() {
+                this.async(function() {
+                    this.itemsToShow = this.buttons.slice(0, this.maxButtons);
+                });
+            },
+            renderElements: function() {
+                if (this.buttons && this.buttonWidth > 0) {
+                    var buttonList = this.$$('#buttonList');
+                    this.maxButtons = parseInt(this.gridWidth / this.buttonWidth);
+
+                    if (this.maxButtons > 0) {
+                        --this.maxButtons;
+                    }
+                    this.itemsToShow = this.buttons.slice(0, this.maxButtons);
+                    this.popoverButtons = this.buttons.slice(this.maxButtons, this.buttons.length);
+                    this.showPopoverButton = this.popoverButtons.length > 0;
+                }
+            },
+
+            windowResize: function(e) {
+                // Do something only if the width changed
+                if (this.lastWidth != this.parentNode.offsetWidth) {
+                    this.lastWidth = this.parentNode.offsetWidth;
+                    this.gridWidth = this.parentNode.offsetWidth;
+                    this.renderElements();
+                }
+            }
+        })
+    </script>
+</dom-module>

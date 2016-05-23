@@ -1,0 +1,18 @@
+<script>
+    Polymer({
+        is: "st-chart-line",
+        nvModel: nv.models.lineChart,
+        behaviors: [NVD3Behavior],
+        properties: {
+            data: {
+                type: Object,
+                value: []
+            }
+        },
+        onCreate: function (chart, svg) {
+            chart.useInteractiveGuideline(true);
+        }
+    });
+</script>
+
+

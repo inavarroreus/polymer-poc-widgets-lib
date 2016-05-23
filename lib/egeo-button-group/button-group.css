@@ -1,0 +1,81 @@
+.egeo-c-buttongroup {
+    box-sizing: border-box;
+    position: relative; }
+.egeo-c-buttongroup__more {
+    display: inline-block;
+    vertical-align: top; }
+
+.egeo-c-popover {
+    box-sizing: border-box;
+    position: relative;
+    background: #fff;
+    border: 0;
+    border-radius: 5px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 0, 0, 0.3), 0 3px 2px -1px rgba(0, 0, 0, 0.1);
+    display: none;
+    padding: 10px 0;
+    position: absolute;
+    width: 300px;
+    z-index: 1; }
+.egeo-c-popover--right-aligned {
+    right: 0; }
+.egeo-c-popover__text {
+    color: #555;
+    font-style: normal;
+    padding: 10px; }
+.egeo-c-popover__listitems {
+    list-style: none; }
+.egeo-c-popover__listitem {
+    background: transparent;
+    border: 0;
+    color: #b5b5b5;
+    cursor: pointer;
+    display: block;
+    list-style: none;
+    margin: 0;
+    padding: 7px 25px;
+    text-align: left;
+    width: 100%; }
+.egeo-c-popover__listitem:hover {
+    background: #e4e4e4; }
+.egeo-c-popover__listitem .egeo-c-icon {
+    color: #37b5e4; }
+.egeo-c-popover__arrow, .egeo-c-popover__arrow-shadow {
+    border-color: transparent;
+    display: none;
+    height: 0;
+    position: absolute;
+    width: 0; }
+.egeo-c-popover__arrow--open, .egeo-c-popover__arrow-shadow--open {
+    display: block; }
+.egeo-c-popover__arrow {
+    border-bottom-color: #fff;
+    z-index: 2; }
+.egeo-c-popover__arrow--top {
+    border-style: dashed dashed solid;
+    border-width: 0 8.5px 8.5px;
+    bottom: -2px;
+    left: calc(50% - 8.5px); }
+.egeo-c-popover__arrow--left {
+    border-style: dashed dashed solid;
+    border-width: 0 8.5px 8.5px;
+    bottom: 2px;
+    left: calc(50% - 1px);
+    -webkit-transform: rotate(270deg);
+    transform: rotate(270deg); }
+.egeo-c-popover__arrow-shadow {
+    border-bottom-color: rgba(0, 0, 0, 0.3); }
+.egeo-c-popover__arrow-shadow--top {
+    border-style: dashed dashed solid;
+    border-width: 0 8.5px 8.5px;
+    bottom: -1px;
+    left: calc(50% - 8.5px); }
+.egeo-c-popover__arrow-shadow--left {
+    border-style: dashed dashed solid;
+    border-width: 0 8.5px 8.5px;
+    bottom: 2px;
+    left: 50%;
+    -webkit-transform: rotate(270deg);
+    transform: rotate(270deg); }
+.egeo-c-popover--open {
+    display: block; }

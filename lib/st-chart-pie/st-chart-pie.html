@@ -1,0 +1,42 @@
+<dom-module is="st-chart-pie">
+    <link rel="import" type="css" href="st-chat-pie.css">
+    <template>
+        <google-chart
+                type='pie'
+                options='{"title": "Distribution of days in 2001Q1"}'
+                data='[[data]]'>
+
+        </google-chart>
+    </template>
+    <script>
+
+    </script>
+</dom-module>
+<script>
+    Polymer({
+        is: "st-chart-pie",
+        properties: {
+            data: {
+                type: Object,
+                value: {}
+            },
+            options: {
+                type: Object,
+                value: {}
+            },
+            cols: {
+                type: Array,
+                value: []
+            },
+            rows: {
+                type: Array,
+                value:[]
+            }
+        },
+        ready: function (chart, svg) {
+            console.log('Creating pie');
+        }
+    });
+</script>
+
+
