@@ -60,6 +60,9 @@
             }
          },
          ready: function () {
+            this.ajaxRequest();
+         },
+         ajaxRequest: function() {
             this.ajaxUrl = this.url + this.connectionId;
             this.ajaxParams = buildParams(this.datasource, this.query, this.year);
             document.getElementById('ajax').generateRequest();
