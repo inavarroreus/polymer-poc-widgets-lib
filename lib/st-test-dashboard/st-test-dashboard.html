@@ -1,0 +1,38 @@
+<dom-module is="st-test-dashboard">
+
+</dom-module>
+<script>
+    Polymer({
+        is: "st-test-dashboard",
+        properties: {
+            data: {
+                type: Array,
+                value: []
+            }
+        },
+        ready: function (chart, svg) {
+
+        },
+        listeners: {
+            'st-widget-click': 'handleWidgetClick'
+        },
+        attached: function () {
+            this.spreadDataToWidgets(this.data);
+        },
+        spreadDataToWidgets: function (data) {
+            var widgets = this.getWidgets();
+            for (var i = 0; i < widgets.length; i++) {
+                widgets[i].data = data;
+            }
+        },
+        getWidgets: function () {
+            return Polymer.dom(this).children;
+        },
+        handleWidgetClick: function (event) {
+            console.log(event);
+        }
+    })
+    ;
+</script>
+
+

@@ -35,7 +35,7 @@
                 'select': 'clickHandler'
             },
             clickHandler: function (event) {
-                console.log(event);
+                this.fire('st-widget-click', event);
                 //value = '['Mar' , 32,4];
             },
             properties: {
@@ -81,7 +81,6 @@
 
             },
             handleResponse: function (event) {
-                console.log(event.detail.response);
                 this.data = event.detail.response;
             },
             checkType: function () {
