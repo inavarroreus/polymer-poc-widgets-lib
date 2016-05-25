@@ -1,5 +1,8 @@
 <dom-module is="st-test-dashboard">
-
+    <template>
+        <content id="myContent"></content>
+        <st-ajax></st-ajax>
+    </template>
 </dom-module>
 <script>
     Polymer({
@@ -10,11 +13,10 @@
                 value: []
             }
         },
-        ready: function (chart, svg) {
-
-        },
-        listeners: {
-            'st-widget-click': 'handleWidgetClick'
+        ready: function () {
+            document.addEventListener('google-chart-select', (function (event) {
+                this.handleWidgetClick(event);
+            }).bind(this));
         },
         attached: function () {
             this.spreadDataToWidgets(this.data);
@@ -29,8 +31,13 @@
             return Polymer.dom(this).children;
         },
         handleWidgetClick: function (event) {
-            console.log(event);
+            var summary = {};
+            summary.column = event.detail.selection[0].column;
+            summary.row = event.detail.selection[0].row;
+            summary.value = this.data[summary.row + 1];
+            console.log(summary);
         }
+
     })
     ;
 </script>

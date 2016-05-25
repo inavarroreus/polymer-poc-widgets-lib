@@ -1,7 +1,7 @@
 <dom-module is="st-ajax">
    <link rel="import" type="css" href="st-ajax.css">
    <template>
-      <iron-ajax id="ajax" method="POST" url="{{ajaxUrl}}" body="{{ajaxParams}}" content-type="application/json" on-response="ajaxResponse"></iron-ajax>
+      <iron-ajax id="ajax" method="POST" url="/testing" body="{{ajaxParams}}" content-type="application/json" on-response="ajaxResponse"></iron-ajax>
    </template>
    <script>
       var queries = {
@@ -59,11 +59,13 @@
                value: '1996'
             }
          },
-         ready: function () {
+         attached: function () {
+            console.log('ajax ready');
             this.ajaxRequest();
          },
          ajaxRequest: function() {
-            this.ajaxUrl = this.url + this.connectionId;
+            console.log('AjaxRequest working....')
+            this.ajaxUrl = '/testing';
             this.ajaxParams = buildParams(this.datasource, this.query, this.year);
             document.getElementById('ajax').generateRequest();
          },
