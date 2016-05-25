@@ -1,7 +1,10 @@
 <dom-module is="st-test-dashboard">
     <template>
+        <template is="dom-if" if="{{showBackLink}}">
+            <button on-click="goBackHandler"> << go back</button>
+        </template>
+        <st-ajax id="stajax"></st-ajax>
         <content id="myContent"></content>
-        <st-ajax></st-ajax>
     </template>
 </dom-module>
 <script>
@@ -11,7 +14,14 @@
             data: {
                 type: Array,
                 value: []
+            },
+            showBackLink: {
+                type: Boolean,
+                value: false
             }
+        },
+        listeners: {
+            'aresponse': 'handleResponse'
         },
         ready: function () {
             document.addEventListener('google-chart-select', (function (event) {
@@ -35,7 +45,20 @@
             summary.column = event.detail.selection[0].column;
             summary.row = event.detail.selection[0].row;
             summary.value = this.data[summary.row + 1];
-            console.log(summary);
+            this.$.stajax.query = 'volumeByMonthAndYear';
+            this.$.stajax.year = summary.value[0];
+            this.$.stajax.ajaxRequest();
+            this.showBackLink = true;
+        },
+        handleResponse: function (event, data) {
+            this.data = data;
+            this.spreadDataToWidgets(data);
+        },
+        goBackHandler: function (event) {
+            this.$.stajax.query = 'volumeByYear';
+            this.$.stajax.year = '1996';
+            this.$.stajax.ajaxRequest();
+            this.showBackLink = false;
         }
 
     })

@@ -1,7 +1,7 @@
 <dom-module is="st-ajax">
    <link rel="import" type="css" href="st-ajax.css">
    <template>
-      <iron-ajax id="ajax" method="POST" url="/testing" body="{{ajaxParams}}" content-type="application/json" on-response="ajaxResponse"></iron-ajax>
+      <iron-ajax id="ajax" method="POST" url="{{ajaxUrl}}" body="{{ajaxParams}}" content-type="application/json" on-response="ajaxResponse"></iron-ajax>
    </template>
    <script>
       var queries = {
@@ -27,7 +27,7 @@
             string: year ? queryString.replace('1996', year) : queryString,
             filters: [],
             aggregations: []
-         }
+         };
          return JSON.stringify(output);
       }
 
@@ -48,7 +48,7 @@
             },
             query: {
                type: String,
-               value: 'volumeByMonthAndYear'
+               value: 'volumeByYear'
             },
             url: {
                type: String,
@@ -60,18 +60,39 @@
             }
          },
          attached: function () {
-            console.log('ajax ready');
             this.ajaxRequest();
          },
          ajaxRequest: function() {
-            console.log('AjaxRequest working....')
-            this.ajaxUrl = '/testing';
+            this.ajaxUrl = this.url + this.connectionId;
             this.ajaxParams = buildParams(this.datasource, this.query, this.year);
             document.getElementById('ajax').generateRequest();
          },
          ajaxResponse: function(request) {
-            this.parsedData = request.detail.response.data;
-            return this.parsedData;
+            this.parsedData = this.getParsedDataFromRawData(request.detail.response);
+            this.fire('aresponse', this.parsedData);
+         },
+         getHeaderFromMetaData: function (metadata){
+            var header = [];
+            for (var i = 0; i < metadata.length; i++) {
+               if(metadata[i].elementType === 'VARCHAR'){
+                  header[0] = metadata[i].elementName;
+               }else{
+                  header[1] = metadata[i].elementName;
+               }
+            }
+            return header;
+         },
+         getParsedDataFromRawData: function (rawData){
+            var header = this.getHeaderFromMetaData(rawData.metaData);
+            var parsedData = [];
+            for (var i = 0; i < rawData.data.length; i++) {
+               var member = [];
+               for (var j = 0; j < header.length; j++) {
+                  member.push(rawData.data[i][header[j]]);
+               }
+               parsedData.push(member);
+            }
+            return [header].concat(parsedData);
          }
       });
    </script>
