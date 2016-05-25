@@ -1,8 +1,7 @@
 <dom-module is="st-ajax">
    <link rel="import" type="css" href="st-ajax.css">
    <template>
-      <iron-ajax id='ajax' method="POST" url="{{ajaxUrl}}" body="{{ajaxParams}}" content-type="application/json"></iron-ajax>
-      <content></content>
+      <iron-ajax id="ajax" method="POST" url="{{ajaxUrl}}" body="{{ajaxParams}}" content-type="application/json" on-response="ajaxResponse"></iron-ajax>
    </template>
    <script>
       var queries = {
@@ -11,20 +10,19 @@
             volumeByYear: "db.orders.aggregate([{$project: {year: {$substr: ['$ShippedDate', 0, 4]}}}, {$match: {year: {$exists: true, $ne: 'NULL'}}}, {$group: {'_id': {'year': '$year'}, 'shippingCount': {'$sum': 1}}}, {$sort: {'_id.year': 1}}])",
             volumeByRegionAndYear: "db.orders.aggregate([{$match: { ShipRegion: {$ne: 'NULL'}}}, {$project: {year: {$substr: ['$ShippedDate', 0, 4]}, ShipRegion: 1}}, {$match: {year: {$eq: '1996'}}}, {'$group': {'_id': {'addr': '$ShipRegion'}, 'shippingCount': {'$sum': 1}}}])",
             volumeByMonth: "db.orders.aggregate([{$project: {month: {$substr: ['$ShippedDate', 5, 2]}}}, {$match: {month: {$exists: true, $ne: ''}}}, {$group: {_id: {month: '$month'}, shippingCount: {$sum: 1}}}, {$sort: {'_id.month': 1}}])",
-            volumeByMonthAndYear: "db.orders.aggregate([{$project: {year: {$substr: ['$ShippedDate', 0, 4]}, month: {$substr: ['$ShippedDate', 5, 2]}}}, {$match: {month: {$exists: true, $ne: ''}}}, {$match: {year: {$eq: '1996'}}}, {$group: {_id: {month: '$month'}, shippingCount: {$sum: 1}}}, {$sort: {'_id.month': 1}}])",
+            volumeByMonthAndYear: "db.orders.aggregate([{$project: {year: {$substr: ['$ShippedDate', 0, 4]}, month: {$substr: ['$ShippedDate', 5, 2]}}}, {$match: {month: {$exists: true, $ne: ''}}}, {$match: {year: {$eq: '1996'}}}, {$group: {_id: {month: '$month'}, shippingCount: {$sum: 1}}}, {$sort: {'_id.month': 1}}])"
          },
          crossdata: {
             volumeByRegion: "SELECT ShipRegion, COUNT(_id) as ShippingVolume FROM Northwind.orders WHERE ShipRegion != 'NULL' GROUP BY ShipRegion",
             volumeByRegionAndYear: "SELECT COUNT(_id) as ShippingVolume, ShipRegion FROM Northwind.orders WHERE ShippedDate != 'NULL' AND SUBSTRING (ShippedDate, 0, 4) = '1996' GROUP BY ShipRegion",
             volumeByYear: "SELECT COUNT(_id) as ShippingVolume, SUBSTRING (ShippedDate, 0, 4) AS year FROM Northwind.orders WHERE ShippedDate != 'NULL' GROUP BY year ORDER BY year",
             volumeByMonth: "SELECT COUNT(_id) as ShippingVolume, SUBSTRING (ShippedDate, 6, 2) AS month FROM Northwind.orders WHERE ShippedDate != 'NULL' GROUP BY month ORDER BY month",
-            volumeByMonthAndYear: "SELECT COUNT(_id) as ShippingVolume, SUBSTRING (ShippedDate, 0, 4) AS year, SUBSTRING (ShippedDate, 6, 2) AS month FROM Northwind.orders WHERE ShippedDate != 'NULL' AND SUBSTRING (ShippedDate, 0, 4) = '1996' GROUP BY year, month ORDER BY month",
+            volumeByMonthAndYear: "SELECT COUNT(_id) as ShippingVolume, SUBSTRING (ShippedDate, 0, 4) AS year, SUBSTRING (ShippedDate, 6, 2) AS month FROM Northwind.orders WHERE ShippedDate != 'NULL' AND SUBSTRING (ShippedDate, 0, 4) = '1996' GROUP BY year, month ORDER BY month"
          }
       };
 
       function buildParams(datasource, query, year) {
          var queryString = queries[datasource][query];
-         console.log(queryString);
          var output = {
             string: year ? queryString.replace('1996', year) : queryString,
             filters: [],
@@ -34,33 +32,44 @@
       }
 
       Polymer({
-         is: "st-ajax",
+         is: 'st-ajax',
          properties: {
-            url: {
-               type: String,
-               value: "http://10.200.0.16:9999/connection/"
-            },
             connectionId: {
                type: String,
-               value: "909044772"
+               value: '909044772'
             },
-            stDatasource: {
+            datasource: {
                type: String,
-               value: ""
+               value: 'mongo'
             },
-            stQuery: {
-               type: String,
-               value: ""
-            },
-            stParsedData: {
+            parsedData: {
                type: Array,
                value: []
+            },
+            query: {
+               type: String,
+               value: 'volumeByMonthAndYear'
+            },
+            url: {
+               type: String,
+               value: 'http://10.200.0.16:9999/connection/'
+            },
+            year: {
+               type: String,
+               value: '1996'
             }
          },
          ready: function () {
+            this.ajaxRequest();
+         },
+         ajaxRequest: function() {
             this.ajaxUrl = this.url + this.connectionId;
-            this.ajaxParams = buildParams('mongo', 'volumeByMonthAndYear');
+            this.ajaxParams = buildParams(this.datasource, this.query, this.year);
             document.getElementById('ajax').generateRequest();
+         },
+         ajaxResponse: function(request) {
+            this.parsedData = request.detail.response.data;
+            return this.parsedData;
          }
       });
    </script>
