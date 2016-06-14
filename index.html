@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <title>Banco pruebas polymer-widgets</title>
-    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-    <link rel="import" href="bower_components/polymer/polymer.html"/>
-    <link rel="import" href="lib/lib.html"/>
-    <style>
-        st-widget {
+   <head>
+      <meta charset="utf-8">
+      <title>Stratio New Viewer POC</title>
+      <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+      <link rel="import" href="bower_components/polymer/polymer.html" />
+      <link rel="import" href="lib/lib.html" />
+      <style>
+         st-widget {
             float: left;
             margin-left: 20px;
-        }
-    </style>
-</head>
-<body>
+         }
+      </style>
+   </head>
 
-<st-test-dashboard>
-    <st-widget type='bar'></st-widget>
-    <st-widget type='pie'></st-widget>
-</st-test-dashboard>
+   <body>
 
-
-
-</body>
+<!--      <st-test-dashboard url="http://10.200.0.16:9999/connection/" connection-id="909044772" datasource="mongo">-->
+      <st-test-dashboard url="http://10.200.0.16:9998/connection/" connection-id="697614819" datasource="crossdata">
+         <st-widget type='bar'></st-widget>
+         <st-widget type='pie'></st-widget>
+      </st-test-dashboard>
+   
+      <st-widget type='line' data='[["label", "value"], ["test1", 10], ["test2", 20], ["test3", 30]]'></st-widget>
+   </body>
 </html>

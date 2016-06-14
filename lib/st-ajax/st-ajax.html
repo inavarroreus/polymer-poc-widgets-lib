@@ -65,7 +65,7 @@
          ajaxRequest: function() {
             this.ajaxUrl = this.url + this.connectionId;
             this.ajaxParams = buildParams(this.datasource, this.query, this.year);
-            document.getElementById('ajax').generateRequest();
+            this.$.ajax.generateRequest();
          },
          ajaxResponse: function(request) {
             this.parsedData = this.getParsedDataFromRawData(request.detail.response);
@@ -74,7 +74,7 @@
          getHeaderFromMetaData: function (metadata){
             var header = [];
             for (var i = 0; i < metadata.length; i++) {
-               if(metadata[i].elementType === 'VARCHAR'){
+               if(metadata[i].elementType === 'VARCHAR' || metadata[i].elementType === 'STRING'){
                   header[0] = metadata[i].elementName;
                }else{
                   header[1] = metadata[i].elementName;
